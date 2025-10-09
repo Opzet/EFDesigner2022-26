@@ -1,4 +1,4 @@
-# Entity Framework Designer - VS2022 Edition
+# Entity Framework Designer - Visual Studio (v2022+ ... incl 2026 insiders) Edition
 
 ## Entity Framework visual design surface and code-first code generation for EF6, EFCore and beyond.
 
