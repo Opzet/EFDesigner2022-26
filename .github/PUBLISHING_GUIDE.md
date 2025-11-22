@@ -1,42 +1,73 @@
 # Understanding Visual Studio Marketplace Publishing Requirements
 
+## IMPORTANT: You're in the WRONG Portal! ⚠️
+
+If you're seeing information about:
+- ❌ "Microsoft Marketplace account in Partner Center"
+- ❌ "Enroll in Microsoft Marketplace program"  
+- ❌ "Symantec ID"
+- ❌ Windows publisher IDs like "CN=65F68A02-..."
+- ❌ "Create commercial offers"
+
+**You are in Partner Center (partner.microsoft.com), which is NOT needed for Visual Studio extensions!**
+
 ## The Confusion Explained
 
-There are **TWO different Microsoft portals** that can be confusing when publishing Visual Studio extensions:
+There are **TWO completely different Microsoft portals** with similar names:
 
 ### 1. Visual Studio Marketplace (What You Need) ✅
 - **URL:** https://marketplace.visualstudio.com/manage
 - **Purpose:** Publishing Visual Studio extensions (VSIX files)
 - **Simple Process:** Create publisher account, upload VSIX
+- **No enrollment or verification needed**
 - **This is the CORRECT portal for this project**
 
 ### 2. Microsoft Partner Center (NOT Needed) ❌
 - **URL:** https://partner.microsoft.com/dashboard
-- **Purpose:** Commercial apps, SaaS offerings, Azure Marketplace solutions
-- **Complex Process:** Requires Partner Agreement, business validation, etc.
-- **NOT required for simple Visual Studio extensions**
+- **Purpose:** Commercial SaaS apps, Azure Marketplace, paid software
+- **Complex Process:** Requires enrollment, business validation, tax setup
+- **Shows Windows publisher IDs, Symantec IDs, etc.**
+- **NOT required for Visual Studio extensions**
+
+## Your Existing Account Information
+
+You've already completed the Partner Center enrollment (which you didn't actually need). Here's what you have:
+
+### Partner Center IDs (Not Used for VSIX Publishing)
+- Windows publisher ID: `CN=65F68A02-BF88-44FB-85D4-D43E48BC8A99`
+- Windows phone publisher ID: `9811ce19-bc53-4ee5-adfa-d95d0dcf9a7f`
+- Publisher name: PWD
+- Seller ID: 89221360
+
+**Note:** These IDs are for Windows Store apps and commercial marketplace offers, NOT for Visual Studio extensions.
+
+### What You Actually Use for VSIX Publishing
+- Just your Microsoft account: david@planworkdone.com
+- Simple publisher profile at marketplace.visualstudio.com
+- No special IDs or enrollment needed
 
 ## What You Actually Need to Do
 
-### Step 1: Sign in to Visual Studio Marketplace
-1. Go to: https://marketplace.visualstudio.com/manage
-2. Sign in with: **david@planworkdone.com**
-3. You should see "Publish extensions" option
+### Step 1: Go to the CORRECT Portal
+1. **Close Partner Center** - you don't need it
+2. Go to: **https://marketplace.visualstudio.com/manage**
+3. Sign in with: **david@planworkdone.com**
 
-### Step 2: Create or Access Publisher Account
-**Option A - If Publisher Already Exists:**
-- If "michaelsawczyn" publisher already exists and you have access:
-  - You can manage it if you're already an owner/contributor
-  - Or you need the current owner to add david@planworkdone.com as a member
+### Step 2: Create or Access Publisher Profile (Simple!)
+**Option A - If Publisher Profile Already Exists:**
+- You may already have a publisher profile from the Partner Center setup
+- Look for "PWD" or similar in the publisher list
+- If you see it, you're done with this step!
   
-**Option B - Create New Publisher:**
+**Option B - Create New Publisher Profile:**
 - Click "Create new publisher"
 - Fill in:
-  - **Publisher Name:** (e.g., "Plan Work Done" or keep "Michael Sawczyn")
-  - **Publisher ID:** (e.g., "planworkdone" - this goes in URLs)
+  - **Publisher Name:** PWD (or any name you want)
+  - **Publisher ID:** pwd (lowercase, for URLs)
+  - **Email:** david@planworkdone.com
   - **Description:** Optional
-  - **Logo:** Optional
 - Click "Create"
+- **That's it! No enrollment, no verification, no waiting**
 
 ### Step 3: Get Personal Access Token (PAT)
 1. Go to: https://dev.azure.com
@@ -111,18 +142,23 @@ Do you want to publish a Visual Studio extension (VSIX)?
 
 ## Summary: What You Don't Need
 
-❌ Microsoft Partner Center account  
-❌ Partner Agreement  
+❌ Microsoft Partner Center account (you already have one but won't use it)
+❌ Partner Agreement or enrollment  
 ❌ Business verification  
 ❌ Azure AD tenant setup (unless using advanced features)  
 ❌ Commercial marketplace enrollment  
+❌ Windows publisher ID (CN=65F68A02-...)
+❌ Symantec ID
+❌ Seller ID (89221360)
+
+These are all for Windows Store apps and commercial marketplace offers, NOT for Visual Studio extensions!
 
 ## Summary: What You DO Need
 
-✅ Microsoft account (david@planworkdone.com)  
-✅ Visual Studio Marketplace publisher account  
-✅ Personal Access Token from Azure DevOps  
-✅ GitHub secret with the PAT  
+✅ Microsoft account (david@planworkdone.com) ← You already have this!
+✅ Visual Studio Marketplace publisher profile ← Simple, 2-minute setup
+✅ Personal Access Token from Azure DevOps ← For automation only
+✅ GitHub secret with the PAT ← For automation only  
 
 ## Next Steps
 

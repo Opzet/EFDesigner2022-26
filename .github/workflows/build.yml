@@ -7,6 +7,10 @@ on:
     branches: [ main, master, develop ]
   workflow_dispatch:
 
+env:
+  VSIX_OUTPUT_PATH: src/DslPackage/bin/Release/Sawczyn.EFDesigner.EFModel.DslPackage.vsix
+  DIST_PATH: dist/Sawczyn.EFDesigner.EFModel.DslPackage.vsix
+
 jobs:
   build:
     runs-on: windows-latest
@@ -32,12 +36,12 @@ jobs:
         if (-not (Test-Path "dist")) {
           New-Item -ItemType Directory -Path "dist"
         }
-        Copy-Item "src/DslPackage/bin/Release/Sawczyn.EFDesigner.EFModel.DslPackage.vsix" "dist/" -Force
+        Copy-Item "$env:VSIX_OUTPUT_PATH" "$env:DIST_PATH" -Force
       shell: pwsh
       
     - name: Upload VSIX artifact
       uses: actions/upload-artifact@v4
       with:
         name: vsix-package
-        path: dist/Sawczyn.EFDesigner.EFModel.DslPackage.vsix
+        path: ${{ env.DIST_PATH }}
         retention-days: 30

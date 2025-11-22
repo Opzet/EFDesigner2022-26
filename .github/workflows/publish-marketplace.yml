@@ -10,6 +10,9 @@ on:
         required: false
         default: ''
 
+env:
+  VSIX_OUTPUT_PATH: src/DslPackage/bin/Release/Sawczyn.EFDesigner.EFModel.DslPackage.vsix
+
 jobs:
   publish:
     runs-on: windows-latest
@@ -36,7 +39,7 @@ jobs:
       
     - name: Set VSIX path from build
       if: ${{ github.event.inputs.vsix_path == '' }}
-      run: echo "VSIX_FILE_PATH=src/DslPackage/bin/Release/Sawczyn.EFDesigner.EFModel.DslPackage.vsix" >> $env:GITHUB_ENV
+      run: echo "VSIX_FILE_PATH=$env:VSIX_OUTPUT_PATH" >> $env:GITHUB_ENV
       shell: pwsh
       
     - name: Set VSIX path from input
