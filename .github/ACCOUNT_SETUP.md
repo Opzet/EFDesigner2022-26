@@ -100,17 +100,52 @@ The following files have been configured with your publisher information:
 
 ## Important Notes
 
-### VSIX Manifest Publisher
-The VSIX manifest file currently has:
-```xml
-Publisher="Michael Sawczyn"
+### VSIX Manifest Publisher vs Publish Manifest Publisher
+
+There are TWO publisher references in different files:
+
+1. **VSIX Manifest** (`src/DslPackage/source.extension.vsixmanifest`):
+   ```xml
+   Publisher="Michael Sawczyn"
+   ```
+   - This is the **author name** shown in Visual Studio
+   - This appears in the extension description
+   - This is embedded in the VSIX file itself
+
+2. **Publish Manifest** (`.github/publish-manifest.json`):
+   ```json
+   "publisher": "PWD"
+   ```
+   - This is the **marketplace publisher ID**
+   - This determines which marketplace account owns the extension
+   - This is used by the publishing workflow
+
+### Decision Required
+
+**Option A - Keep Both Names (Recommended for Takeover):**
+- VSIX Manifest: Keep "Michael Sawczyn" as author
+- Publish Manifest: Use "PWD" as marketplace owner
+- Result: Extension shows original author but is published under your account
+- Use when: Taking over maintenance of existing extension
+
+**Option B - Update to Match (Recommended for New Extension):**
+- VSIX Manifest: Change to "PWD" or "David Veerman"
+- Publish Manifest: Keep "PWD"
+- Result: Consistent branding throughout
+- Use when: Publishing as a completely new extension
+
+### Current Configuration
+
+✅ Publish manifest set to: **PWD**  
+⚠️ VSIX manifest still has: **Michael Sawczyn**
+
+**This is INTENTIONAL** - The extension will publish under your PWD account but show "Michael Sawczyn" as the author in Visual Studio. This is fine if you're taking over the project.
+
+If you want to change the VSIX manifest, edit:
 ```
-
-**Decision Required:**
-- **Keep it:** The extension shows "Michael Sawczyn" as author in VS
-- **Change it:** Update to "PWD" or "David Veerman" for your branding
-
-To change, edit: `src/DslPackage/source.extension.vsixmanifest` line 4
+src/DslPackage/source.extension.vsixmanifest
+Line 4: Publisher="Michael Sawczyn"
+```
 
 ### Extension Identity
 Current extension ID in VSIX manifest:
