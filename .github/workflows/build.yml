@@ -1,0 +1,43 @@
+name: Build VSIX
+
+on:
+  push:
+    branches: [ main, master, develop ]
+  pull_request:
+    branches: [ main, master, develop ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v2
+      
+    - name: Setup NuGet
+      uses: nuget/setup-nuget@v2
+      
+    - name: Restore NuGet packages
+      run: nuget restore src/EFDesigner2022.sln
+      
+    - name: Build solution
+      run: msbuild src/EFDesigner2022.sln /t:Rebuild /p:Configuration=Release /p:Platform="Any CPU" /m
+      
+    - name: Copy VSIX to dist folder
+      run: |
+        if (-not (Test-Path "dist")) {
+          New-Item -ItemType Directory -Path "dist"
+        }
+        Copy-Item "src/DslPackage/bin/Release/Sawczyn.EFDesigner.EFModel.DslPackage.vsix" "dist/" -Force
+      shell: pwsh
+      
+    - name: Upload VSIX artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: vsix-package
+        path: dist/Sawczyn.EFDesigner.EFModel.DslPackage.vsix
+        retention-days: 30

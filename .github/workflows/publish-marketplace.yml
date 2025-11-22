@@ -1,0 +1,52 @@
+name: Publish to VS Marketplace
+
+on:
+  release:
+    types: [ published ]
+  workflow_dispatch:
+    inputs:
+      vsix_path:
+        description: 'Path to VSIX file (leave empty to build from source)'
+        required: false
+        default: ''
+
+jobs:
+  publish:
+    runs-on: windows-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v2
+      if: ${{ github.event.inputs.vsix_path == '' }}
+      
+    - name: Setup NuGet
+      uses: nuget/setup-nuget@v2
+      if: ${{ github.event.inputs.vsix_path == '' }}
+      
+    - name: Restore NuGet packages
+      run: nuget restore src/EFDesigner2022.sln
+      if: ${{ github.event.inputs.vsix_path == '' }}
+      
+    - name: Build solution
+      run: msbuild src/EFDesigner2022.sln /t:Rebuild /p:Configuration=Release /p:Platform="Any CPU" /m
+      if: ${{ github.event.inputs.vsix_path == '' }}
+      
+    - name: Set VSIX path from build
+      if: ${{ github.event.inputs.vsix_path == '' }}
+      run: echo "VSIX_FILE_PATH=src/DslPackage/bin/Release/Sawczyn.EFDesigner.EFModel.DslPackage.vsix" >> $env:GITHUB_ENV
+      shell: pwsh
+      
+    - name: Set VSIX path from input
+      if: ${{ github.event.inputs.vsix_path != '' }}
+      run: echo "VSIX_FILE_PATH=${{ github.event.inputs.vsix_path }}" >> $env:GITHUB_ENV
+      shell: pwsh
+      
+    - name: Publish to Visual Studio Marketplace
+      uses: cezarypiatek/VsixPublisherAction@1.1
+      with:
+        extension-file: ${{ env.VSIX_FILE_PATH }}
+        publish-manifest-file: .github/publish-manifest.json
+        personal-access-code: ${{ secrets.VS_MARKETPLACE_TOKEN }}
