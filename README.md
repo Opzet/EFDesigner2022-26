@@ -10,6 +10,19 @@ Model and generate code for both Entity Framework v6.x and Entity Framework Core
 
 **Complete documentation in the [project's documentation site](https://msawczyn.github.io/EFDesigner/)**
 
+---
+
+## 🚀 Automated Publishing
+
+This repository includes automated CI/CD workflows to build and publish the extension to the Visual Studio Marketplace:
+
+- **Build Workflow** - Automatically builds and validates VSIX on every push/PR
+- **Publish Workflow** - Automatically publishes to VS Marketplace on new releases
+
+📖 **Setup Guide:** See [`.github/README.md`](.github/README.md) for complete publishing documentation.
+
+---
+
 <table><tbody><tr><td>
 <img src="https://msawczyn.github.io/EFDesigner/images/Designer.jpg">
 </td></tr></tbody></table>
@@ -161,3 +174,20 @@ More hands make the work lighter, and I know there are some really bright people
    - Added support for temporal tables
 
 Earlier changes at [the VS2019 version](https://github.com/msawczyn/EFDesigner).
+
+---
+
+## 🔧 Development & Publishing
+
+### Building Locally
+See the build script in `rebuild.cmd` for manual building.
+
+### Automated CI/CD
+This repository uses GitHub Actions for:
+- Automated building and validation on every push
+- Automated publishing to Visual Studio Marketplace on releases
+
+For complete setup and publishing documentation, see [`.github/README.md`](.github/README.md).
+
+### Contributing
+Contributions are welcome! Please see [`docs/Development.md`](docs/Development.md) for contribution guidelines.
