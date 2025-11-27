@@ -1,8 +1,11 @@
 # Entity Framework Designer - Visual Studio (v2022+ ... incl 2026 insiders) Edition
 
-## Entity Framework visual design surface and code-first code generation for EF6, EFCore and beyond.
+### For Visual Studio 2022-26 Insiders
+Download and install : https://github.com/Opzet/EFDesigner2022-26/blob/master/dist/Sawczyn.EFDesigner.EFModel.DslPackage.vsix 
 
-### For Visual Studio 2022
+---
+
+## Entity Framework visual design surface and code-first code generation for EF6, EFCore and beyond.
 
 Model and generate code for both Entity Framework v6.x and Entity Framework Core 2 through 8.
 
