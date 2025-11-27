@@ -1,7 +1,9 @@
 # Entity Framework Designer - Visual Studio (v2022+ ... incl 2026 insiders) Edition
 
 ### For Visual Studio 2022-26 Insiders
-Download and install : https://github.com/Opzet/EFDesigner2022-26/blob/master/dist/Sawczyn.EFDesigner.EFModel.DslPackage.vsix 
+
+Working on publishing...
+ https://github.com/Opzet/EFDesigner2022-26/blob/master/dist/Sawczyn.EFDesigner.EFModel.DslPackage.vsix 
 
 ---
 
