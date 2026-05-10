@@ -1,3 +1,17 @@
+# Why EFDesigner (DSL Tools) fails in Visual Studio 2026
+Your open tab shows the community fork of EFDesigner, but Visual Studio 2026 breaks it because:
+
+## 1. DSL Tools are dead
+Microsoft stopped updating the Modeling SDK years ago.
+VS 2026 removed or changed internal components EFDesigner depends on.
+
+## 2. MEF composition changes
+VS 2026 tightened MEF isolation → old VSIX packages fail to load.
+
+
+--------------
+
+
 # Entity Framework Designer - Visual Studio (v2022+ ... incl 2026 insiders) Edition
 
 ### For Visual Studio 2022-26 Insiders
